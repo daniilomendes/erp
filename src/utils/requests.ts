@@ -23,7 +23,7 @@ const signIn = async ({
   return response;
 };
 
-const getUser = async ({}) => {
+const getUser = async () => {
   const response = await useApi<ApiGetUser>('auth/user');
   return response;
 };
