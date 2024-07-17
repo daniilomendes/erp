@@ -1,9 +1,11 @@
-import { FC, ReactNode } from 'react';
-import { Box, alpha, lighten, useTheme } from '@mui/material';
+import { FC, ReactNode, useEffect, useState } from 'react';
+import { Box, LinearProgress, alpha, lighten, useTheme } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
 import Sidebar from './Sidebar';
 import Header from './Header';
+import { useAuth } from 'src/utils/auth';
+import { AuthMiddleware } from 'src/middlewares/AuthMiddleware';
 
 interface SidebarLayoutProps {
   children?: ReactNode;
@@ -12,8 +14,25 @@ interface SidebarLayoutProps {
 const SidebarLayout: FC<SidebarLayoutProps> = () => {
   const theme = useTheme();
 
+  const { handleInitUser } = useAuth();
+
+  const [authLoading, setAuthLoading] = useState(true);
+
+  useEffect(() => {
+    const authenticateUser = async () => {
+      await handleInitUser();
+      setAuthLoading(false);
+    };
+
+    authenticateUser();
+  }, []);
+
+  if (authLoading) {
+    return <LinearProgress style={{ height: 3 }} />;
+  }
+
   return (
-    <>
+    <AuthMiddleware>
       <Box
         sx={{
           flex: 1,
@@ -60,7 +79,7 @@ const SidebarLayout: FC<SidebarLayoutProps> = () => {
           </Box>
         </Box>
       </Box>
-    </>
+    </AuthMiddleware>
   );
 };
 
