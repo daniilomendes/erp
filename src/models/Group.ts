@@ -6,7 +6,7 @@ export type Group = {
 };
 
 export type GroupDetail = Group & {
-  permission: Permission[];
+  permissions: Permission[];
 };
 
 export type ApiGetGroups = {
