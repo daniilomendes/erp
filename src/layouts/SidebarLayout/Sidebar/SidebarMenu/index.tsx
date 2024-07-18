@@ -31,7 +31,7 @@ import ChromeReaderModeTwoToneIcon from '@mui/icons-material/ChromeReaderModeTwo
 import WorkspacePremiumTwoToneIcon from '@mui/icons-material/WorkspacePremiumTwoTone';
 import CameraFrontTwoToneIcon from '@mui/icons-material/CameraFrontTwoTone';
 import DisplaySettingsTwoToneIcon from '@mui/icons-material/DisplaySettingsTwoTone';
-import { Add, Group, Tune } from '@mui/icons-material';
+import { Add, Group, PersonAddAlt1, Tune } from '@mui/icons-material';
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -257,6 +257,18 @@ function SidebarMenu() {
                   startIcon={<Group />}
                 >
                   Gerenciar
+                </Button>
+              </ListItem>
+
+              <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="/employees-add"
+                  startIcon={<PersonAddAlt1 />}
+                >
+                  Adicionar
                 </Button>
               </ListItem>
             </List>
