@@ -48,7 +48,7 @@ const GroupsTable = ({ groupsLists, refreshList }: Props) => {
             <TableHead>
               <TableRow>
                 <TableCell>ID</TableCell>
-                <TableCell>name</TableCell>
+                <TableCell>Nome</TableCell>
                 <TableCell align="right">Ações</TableCell>
               </TableRow>
             </TableHead>
