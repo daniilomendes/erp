@@ -13,7 +13,7 @@ import {
   Tooltip,
   Typography
 } from '@mui/material';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { GroupDetail } from 'src/models/Group';
 import { useAuth } from 'src/utils/auth';
@@ -64,14 +64,23 @@ const GroupsTable = ({ groupsLists, refreshList }: Props) => {
 
                   <TableCell>
                     <Typography fontWeight="bold" gutterBottom>
-                      #{group.name}
+                      {group.name}
                     </Typography>
                   </TableCell>
 
                   <TableCell align="right">
                     {handlePermissionExists('change_group') && (
                       <Tooltip title="Editar cargo" arrow>
-                        <IconButton>
+                        <IconButton
+                          sx={{
+                            '&:hover': {
+                              background: theme.colors.primary.lighter
+                            },
+                            color: theme.palette.primary.main
+                          }}
+                          color="inherit"
+                          size="small"
+                        >
                           <EditTwoToneIcon
                             onClick={() => handleEditGroup(group.id)}
                           />
@@ -81,7 +90,16 @@ const GroupsTable = ({ groupsLists, refreshList }: Props) => {
 
                     {handlePermissionExists('delete_group') && (
                       <Tooltip title="Excluir cargo" arrow>
-                        <IconButton>
+                        <IconButton
+                          sx={{
+                            '&:hover': {
+                              background: theme.colors.primary.lighter
+                            },
+                            color: theme.palette.error.main
+                          }}
+                          color="inherit"
+                          size="small"
+                        >
                           <DeleteTwoToneIcon
                             onClick={() => handleDeleteGroup(group.id)}
                           />
