@@ -33,6 +33,7 @@ import CameraFrontTwoToneIcon from '@mui/icons-material/CameraFrontTwoTone';
 import DisplaySettingsTwoToneIcon from '@mui/icons-material/DisplaySettingsTwoTone';
 import {
   Add,
+  AddTask,
   FormatListBulleted,
   Group,
   PersonAddAlt1,
@@ -301,6 +302,18 @@ function SidebarMenu() {
                   startIcon={<FormatListBulleted />}
                 >
                   Gerenciar
+                </Button>
+              </ListItem>
+
+              <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="/tasks-add"
+                  startIcon={<AddTask />}
+                >
+                  Adicionar
                 </Button>
               </ListItem>
             </List>
