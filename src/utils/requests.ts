@@ -1,4 +1,4 @@
-import { ApiGetUser, ApiSignIn } from 'src/models/Auth';
+import { ApiGetUser, ApiSignIn, ApiSignUp } from 'src/models/Auth';
 import { useApi } from './api';
 import { ApiGetPermissions } from 'src/models/Permission';
 import { ApiGetGroup, ApiGetGroups } from 'src/models/Group';
@@ -6,6 +6,29 @@ import { ApiGetEmployee, ApiGetEmployees } from 'src/models/Employee';
 import { ApiGetTask, ApiGetTasks } from 'src/models/Tasks';
 
 // Authentication
+const signUp = async ({
+  name,
+  email,
+  password
+}: {
+  name: string;
+  email: string;
+  password: string;
+}) => {
+  const response = await useApi<ApiSignUp>(
+    'auth/signup',
+    'POST',
+    {
+      name,
+      email,
+      password
+    },
+    false
+  );
+
+  return response;
+};
+
 const signIn = async ({
   email,
   password
@@ -203,6 +226,7 @@ const deleteTask = async (id: number) => {
 // Exporting all requests
 export const useRequests = () => ({
   // Auth
+  signUp,
   signIn,
   getUser,
 

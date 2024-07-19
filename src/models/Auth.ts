@@ -22,3 +22,10 @@ export type ApiSignIn = {
   refresh: string;
   access: string;
 };
+
+export type ApiSignUp = {
+  user: User;
+  enterprise: UserEnterpriseDetail;
+  refresh: string;
+  access: string;
+};

@@ -27,24 +27,29 @@ const MainContent = styled(Box)(
 `
 );
 
-const SignIn = () => {
+const SignUp = () => {
   const navigate = useNavigate();
 
   const [snackBarMessage, setSnackBarMessage] = useState('');
+  const [nameInput, setNameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
 
-  const { handleSignIn } = useAuth();
+  const { handleSignUp } = useAuth();
 
-  const handleSignInBtn = async () => {
-    if (emailInput == '' || passwordInput == '') {
+  const handleSignUpBtn = async () => {
+    if (nameInput == '' || emailInput == '' || passwordInput == '') {
       setSnackBarMessage('Preencha todos os campos!');
       return;
     }
 
-    const requestSignIn = await handleSignIn(emailInput, passwordInput);
+    const requestSignUp = await handleSignUp(
+      nameInput,
+      emailInput,
+      passwordInput
+    );
 
-    if (requestSignIn.detail) {
+    if (requestSignUp.detail) {
       setSnackBarMessage(' Email e/ou senha incorreto(s)');
       return;
     }
@@ -56,7 +61,7 @@ const SignIn = () => {
   return (
     <>
       <Helmet>
-        <title>Login</title>
+        <title>Criar Empresa</title>
       </Helmet>
 
       <Snackbar
@@ -74,6 +79,13 @@ const SignIn = () => {
           <Card sx={{ textAlign: 'center', mt: 3, p: 4 }}>
             <Stack spacing={3}>
               <TextField
+                label="Seu nome"
+                type="name"
+                value={nameInput}
+                onChange={(e) => setNameInput(e.target.value)}
+              />
+
+              <TextField
                 label="Seu email"
                 type="email"
                 value={emailInput}
@@ -87,11 +99,11 @@ const SignIn = () => {
                 onChange={(e) => setPasswordInput(e.target.value)}
               />
               <Button
-                onClick={handleSignInBtn}
+                onClick={handleSignUpBtn}
                 variant="outlined"
                 style={{ marginTop: 40 }}
               >
-                Entrar
+                Criar Empresa
               </Button>
             </Stack>
           </Card>
@@ -100,9 +112,9 @@ const SignIn = () => {
             fullWidth
             component={RouterLink}
             sx={{ mt: 3 }}
-            to="/signup"
+            to="/signin"
           >
-            Criar conta
+            Entrar
           </Button>
         </Container>
       </MainContent>
@@ -110,4 +122,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

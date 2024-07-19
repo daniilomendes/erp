@@ -13,7 +13,7 @@ export const useAuth = () => {
 
   const dispatch = useDispatch();
 
-  const { signIn, getUser } = useRequests();
+  const { signIn, getUser, signUp } = useRequests();
 
   const user = {
     user: auth.user,
@@ -38,6 +38,24 @@ export const useAuth = () => {
     return auth.enterprise.permissions.some(
       (p) => p.codename == permissionCodename
     );
+  };
+
+  const handleSignUp = async (
+    name: string,
+    email: string,
+    password: string
+  ) => {
+    const response = await signUp({ name, email, password });
+
+    if (!response.detail) {
+      dispatch(setUser(response.data.user));
+      dispatch(setUserEnterprise(response.data.enterprise));
+
+      // Save token access
+      localStorage.setItem(LOCAL_STORAGE_KEY, response.data.access);
+    }
+
+    return response;
   };
 
   const handleSignIn = async (email: string, password: string) => {
@@ -66,6 +84,7 @@ export const useAuth = () => {
     isLogged: auth.user != null,
     handleInitUser,
     handlePermissionExists,
+    handleSignUp,
     handleSignIn,
     handleSignOut
   };
